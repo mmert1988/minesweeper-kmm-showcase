@@ -1,5 +1,7 @@
 plugins {
+    @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
     alias(libs.plugins.kotlinMultiplatform)
+    @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
     alias(libs.plugins.androidLibrary)
 }
 
@@ -25,10 +27,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            //put your multiplatform dependencies here
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.coroutines.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.turbine.turbine)
         }
     }
 }
