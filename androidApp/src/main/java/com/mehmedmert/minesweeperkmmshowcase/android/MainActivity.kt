@@ -4,13 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.mehmedmert.minesweeperkmmshowcase.Greeting
+import com.mehmedmert.minesweeperkmmshowcase.android.game.GameView
+import com.mehmedmert.minesweeperkmmshowcase.android.game.GameViewModel
+import com.mehmedmert.minesweeperkmmshowcase.android.game.GameViewStatus
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val gameViewModel by viewModel<GameViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -19,22 +25,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingView(Greeting().greet())
+                    val gameViewStatus = gameViewModel.gameViewStatus.collectAsState(initial = GameViewStatus())
+                    GameView(
+                        gameViewStatus = gameViewStatus.value,
+                        onCellClicked = gameViewModel::onOpenCell,
+                        onCellDoubleClicked = gameViewModel::onToggleFlag,
+                        onStartNewGameClicked = gameViewModel::onStartNewGame,
+                    )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun GreetingView(text: String) {
-    Text(text = text)
-}
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView("Hello, Android!")
     }
 }

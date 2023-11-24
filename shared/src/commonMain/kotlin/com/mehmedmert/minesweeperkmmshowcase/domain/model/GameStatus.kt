@@ -8,6 +8,8 @@ sealed class GameStatus(
     open val openedCells: Map<Pair<Int, Int>, Int>,
     open val flags: Set<Pair<Int, Int>>,
 ) {
+    data object Initial : GameStatus(0, 0, mapOf(), setOf())
+
     data class Running(
         override val rows: Int,
         override val columns: Int,
