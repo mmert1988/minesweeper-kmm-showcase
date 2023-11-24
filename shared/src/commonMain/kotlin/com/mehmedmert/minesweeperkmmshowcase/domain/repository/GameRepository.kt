@@ -1,6 +1,6 @@
-package com.mehmedmert.minesweeperkmmshowcase.domain
+package com.mehmedmert.minesweeperkmmshowcase.domain.repository
 
-import com.mehmedmert.minesweeperkmmshowcase.repository.GameRepositoryImpl
+import com.mehmedmert.minesweeperkmmshowcase.domain.model.GameStatus
 import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {

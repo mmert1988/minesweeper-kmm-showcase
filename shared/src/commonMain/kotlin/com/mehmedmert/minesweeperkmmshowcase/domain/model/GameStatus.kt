@@ -1,4 +1,4 @@
-package com.mehmedmert.minesweeperkmmshowcase.domain
+package com.mehmedmert.minesweeperkmmshowcase.domain.model
 
 import kotlinx.datetime.Instant
 

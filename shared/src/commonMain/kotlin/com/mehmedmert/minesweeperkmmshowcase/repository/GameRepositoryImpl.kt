@@ -1,7 +1,7 @@
 package com.mehmedmert.minesweeperkmmshowcase.repository
 
-import com.mehmedmert.minesweeperkmmshowcase.domain.GameRepository
-import com.mehmedmert.minesweeperkmmshowcase.domain.GameStatus
+import com.mehmedmert.minesweeperkmmshowcase.domain.repository.GameRepository
+import com.mehmedmert.minesweeperkmmshowcase.domain.model.GameStatus
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

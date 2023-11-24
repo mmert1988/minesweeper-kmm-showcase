@@ -4,7 +4,7 @@ import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertIs
 import app.cash.turbine.test
-import com.mehmedmert.minesweeperkmmshowcase.domain.GameStatus
+import com.mehmedmert.minesweeperkmmshowcase.domain.model.GameStatus
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 
