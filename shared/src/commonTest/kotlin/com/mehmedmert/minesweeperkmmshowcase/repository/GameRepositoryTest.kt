@@ -1,12 +1,12 @@
-package com.mehmedmert.minesweeperkmmshowcase.domain
+package com.mehmedmert.minesweeperkmmshowcase.repository
 
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertIs
 import app.cash.turbine.test
+import com.mehmedmert.minesweeperkmmshowcase.domain.GameStatus
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 
 class GameRepositoryTest {
     @Test
@@ -85,7 +85,7 @@ class GameRepositoryTest {
 
     @Test
     fun `test default new game`() = runBlocking {
-        val tested = GameRepository()
+        val tested = GameRepositoryImpl()
         tested.gameStatus.test {
             val gameStatus = awaitItem()
             assertIs<GameStatus.Running>(gameStatus)
@@ -118,7 +118,7 @@ class GameRepositoryTest {
 
     @Test
     fun `test max neighbour mines`() = runBlocking {
-        val tested = GameRepository().apply {
+        val tested = GameRepositoryImpl().apply {
             newGame(
                 rows = 3,
                 columns = 3,
@@ -159,7 +159,7 @@ class GameRepositoryTest {
         }
     }
 
-    private fun createTestGame() = GameRepository().apply {
+    private fun createTestGame() = GameRepositoryImpl().apply {
         newGame(
             rows = 3,
             columns = 3,

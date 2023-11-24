@@ -8,6 +8,7 @@ androidx-activityCompose = "1.8.1"
 kotlinxCoroutinesCore = "1.7.1"
 kotlinxDatetime = "0.4.0"
 turbine = "1.0.0"
+koin = "3.2.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -20,6 +21,8 @@ compose-material3 = { module = "androidx.compose.material3:material3", version.r
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 turbine-turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
