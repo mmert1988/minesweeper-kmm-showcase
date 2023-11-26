@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 internal class GameRepositoryImpl : GameRepository {
     private val _gameStatus = MutableSharedFlow<GameStatus>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    private var mines: Set<Pair<Int, Int>> = emptySet()
+    internal var mines: Set<Pair<Int, Int>> = emptySet()
 
     init {
         newGame()
@@ -43,7 +43,7 @@ internal class GameRepositoryImpl : GameRepository {
     }
 
     private fun openCellRecursively(cell: Pair<Int, Int>, gameStatus: GameStatus.Running): GameStatus.Running {
-        if (cell.first < 0 ||
+            if (cell.first < 0 ||
             cell.first >= gameStatus.rows ||
             cell.second < 0 ||
             cell.second >= gameStatus.columns) {
@@ -119,12 +119,10 @@ internal class GameRepositoryImpl : GameRepository {
 
     private fun generateMines(rows: Int, columns: Int, minesCount: Int): Set<Pair<Int, Int>> {
         val mines = mutableSetOf<Pair<Int, Int>>()
-        val randomRow = Random(rows - 1)
-        val randomColumn = Random(columns - 1)
         var index = 0
         while (index < minesCount) {
-            val row = randomRow.nextInt()
-            val column = randomColumn.nextInt()
+            val row = Random.nextInt(rows)
+            val column = Random.nextInt(columns)
             val mine = Pair(row, column)
             if (mines.contains(mine).not()) {
                 mines.add(mine)

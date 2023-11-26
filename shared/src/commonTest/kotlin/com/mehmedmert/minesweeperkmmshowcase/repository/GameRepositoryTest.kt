@@ -7,6 +7,7 @@ import app.cash.turbine.test
 import com.mehmedmert.minesweeperkmmshowcase.domain.model.GameStatus
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class GameRepositoryTest {
     @Test
@@ -122,7 +123,7 @@ class GameRepositoryTest {
             newGame(
                 rows = 3,
                 columns = 3,
-                mines = listOf(
+                mines = setOf(
                     Pair(0, 0),
                     Pair(0, 1),
                     Pair(0, 2),
@@ -159,11 +160,33 @@ class GameRepositoryTest {
         }
     }
 
+    @Test
+    fun `test generated mines are in range`() = runBlocking {
+        val tested = GameRepositoryImpl().apply {
+            newGame(
+                rows = 30,
+                columns = 30,
+                minesCount = 8,
+            )
+        }
+
+        tested.mines.forEach {
+            assertTrue(it.first in 0..<30, "Row not in range: ${it.first}")
+            assertTrue(it.second in 0..<30, "Column not in range: ${it.second}")
+        }
+
+        tested.gameStatus.test {
+            val gameStatus = awaitItem()
+            assertIs<GameStatus.Running>(gameStatus)
+            assertEquals(8, gameStatus.remainingMines)
+        }
+    }
+
     private fun createTestGame() = GameRepositoryImpl().apply {
         newGame(
             rows = 3,
             columns = 3,
-            mines = listOf(Pair(0, 0))
+            mines = setOf(Pair(0, 0))
         )
     }
 }
