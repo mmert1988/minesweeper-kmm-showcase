@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 internal class GameRepositoryImpl : GameRepository {
     private val _gameStatus = MutableSharedFlow<GameStatus>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    private var mines: List<Pair<Int, Int>> = emptyList()
+    private var mines: Set<Pair<Int, Int>> = emptySet()
 
     init {
         newGame()
@@ -102,7 +102,7 @@ internal class GameRepositoryImpl : GameRepository {
     internal fun newGame(
         rows: Int,
         columns: Int,
-        mines: List<Pair<Int, Int>>,
+        mines: Set<Pair<Int, Int>>,
     ) {
         this.mines = mines
         _gameStatus.tryEmit(
@@ -117,8 +117,8 @@ internal class GameRepositoryImpl : GameRepository {
         )
     }
 
-    private fun generateMines(rows: Int, columns: Int, minesCount: Int): List<Pair<Int, Int>> {
-        val mines = mutableListOf<Pair<Int, Int>>()
+    private fun generateMines(rows: Int, columns: Int, minesCount: Int): Set<Pair<Int, Int>> {
+        val mines = mutableSetOf<Pair<Int, Int>>()
         val randomRow = Random(rows - 1)
         val randomColumn = Random(columns - 1)
         var index = 0

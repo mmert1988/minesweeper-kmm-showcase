@@ -8,8 +8,6 @@ sealed class GameStatus(
     open val openedCells: Map<Pair<Int, Int>, Int>,
     open val flags: Set<Pair<Int, Int>>,
 ) {
-    data object Initial : GameStatus(0, 0, mapOf(), setOf())
-
     data class Running(
         override val rows: Int,
         override val columns: Int,
@@ -31,6 +29,6 @@ sealed class GameStatus(
         override val columns: Int,
         override val openedCells: Map<Pair<Int, Int>, Int>,
         override val flags: Set<Pair<Int, Int>>,
-        val mines: List<Pair<Int, Int>>,
+        val mines: Set<Pair<Int, Int>>,
     ) : GameStatus(rows, columns, openedCells, flags)
 }

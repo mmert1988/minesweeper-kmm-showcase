@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     GameView(
                         gameViewStatus = gameViewStatus.value,
                         onCellClicked = gameViewModel::onOpenCell,
-                        onCellDoubleClicked = gameViewModel::onToggleFlag,
+                        onCellLongPressed = gameViewModel::onToggleFlag,
                         onStartNewGameClicked = gameViewModel::onStartNewGame,
                     )
                 }
