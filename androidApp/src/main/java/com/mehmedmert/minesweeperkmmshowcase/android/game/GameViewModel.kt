@@ -7,7 +7,6 @@ import com.mehmedmert.minesweeperkmmshowcase.domain.ConsumerUseCase
 import com.mehmedmert.minesweeperkmmshowcase.domain.FlowSupplierUseCase
 import com.mehmedmert.minesweeperkmmshowcase.domain.model.GameStatus
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 

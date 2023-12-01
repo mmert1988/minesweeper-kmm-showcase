@@ -5,7 +5,7 @@ import com.mehmedmert.minesweeperkmmshowcase.repository.GameRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory { provideGameRepository() }
+    single { provideGameRepository() }
 }
 
 private fun provideGameRepository(): GameRepository = GameRepositoryImpl()

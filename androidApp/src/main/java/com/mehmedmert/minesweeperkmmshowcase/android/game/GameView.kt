@@ -1,16 +1,23 @@
 package com.mehmedmert.minesweeperkmmshowcase.android.game
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -63,6 +70,7 @@ private fun MinesView(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun CellView(
     cell: Cell,
@@ -70,38 +78,53 @@ private fun CellView(
     onLongPressed: () -> Unit,
 ) {
     Box(
-        modifier = Modifier.size(20.dp)
+        modifier = Modifier
+            .size(36.dp)
+            .border(width = 0.125.dp, color = Color.LightGray)
     ) {
         when (cell) {
-            is Cell.Closed, is Cell.Flagged -> ClosedCell(cell, onClicked, onLongPressed)
+            is Cell.Closed, is Cell.Flagged -> Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .combinedClickable(
+                        onClick = onClicked,
+                        onLongClick = onLongPressed
+                    )
+
+            ) {
+                ClosedCell(cell)
+            }
             is Cell.Open, is Cell.Mined -> OpenCell(cell)
         }
     }
 }
 
 @Composable
-private fun OpenCell(cell: Cell) {
+private fun BoxScope.OpenCell(cell: Cell) {
     when (cell) {
         is Cell.Mined -> Image(
             painter = painterResource(id = R.drawable.twotone_dangerous_24),
-            contentDescription = null
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.Center)
         )
 
-        is Cell.Open -> Text(text = cell.minesAroundCount.toString())
+        is Cell.Open -> Text(
+            text = cell.minesAroundCount.toString(),
+            modifier = Modifier.align(Alignment.Center)
+        )
         else -> {}
     }
 }
 
 @Composable
-private fun ClosedCell(
-    cell: Cell,
-    onClicked: () -> Unit,
-    onLongPressed: () -> Unit,
+private fun BoxScope.ClosedCell(
+    cell: Cell
 ) {
     when (cell) {
         is Cell.Flagged -> Image(
             painter = painterResource(id = R.drawable.twotone_flag_24),
-            contentDescription = null
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.Center)
         )
 
         is Cell.Closed -> Box {}
